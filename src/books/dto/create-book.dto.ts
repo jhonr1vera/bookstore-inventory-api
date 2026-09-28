@@ -1,6 +1,7 @@
-import { IsNotEmpty, IsNumber, IsString, Matches, IsIn, IsPositive, IsISBN } from "class-validator";
+import { IsNotEmpty, IsNumber, IsString, Matches, IsIn, IsPositive, Min } from "class-validator";
 import { Transform } from "class-transformer";
 import { SUPPORTED_COUNTRIES } from "../../common/constants/countries.constant.js";
+import { BookCategory } from "../enums/book-category.enum.js";
 
 export class CreateBookDto {
     @IsString()
@@ -28,8 +29,10 @@ export class CreateBookDto {
 
     @IsNumber()
     @IsNotEmpty()
+    @Min(0)
     stock_quantity: number;
 
+    @IsIn(Object.values(BookCategory))
     @IsString()
     @IsNotEmpty()
     category: string;

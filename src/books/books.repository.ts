@@ -2,7 +2,6 @@ import { ConflictException, Injectable, NotFoundException } from '@nestjs/common
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Book } from './entities/book.entity.js';
-import { CreateBookDto } from './dto/create-book.dto.js';
 import { UpdateBookDto } from './dto/update-book.dto.js';
 import { MESSAGES } from '../common/constants/messages.constant.js';
 
@@ -21,8 +20,8 @@ export class BooksRepository {
     );
   }
 
-  async create(createBookDto: CreateBookDto): Promise<Book> {
-    const book = this.repository.create(createBookDto);
+  async create(bookData: import('typeorm').DeepPartial<Book>): Promise<Book> {
+    const book = this.repository.create(bookData);
     try {
       return await this.repository.save(book);
     } catch (error: unknown) {
@@ -52,9 +51,9 @@ export class BooksRepository {
     return book;
   }
 
-  async update(id: number, updateBookDto: UpdateBookDto, book: Book | null): Promise<Book> {
-    this.repository.merge(book!, updateBookDto);
-    return this.save(book!);
+  async update(id: number, updateBookDto: UpdateBookDto, book: Book): Promise<Book> {
+    this.repository.merge(book, updateBookDto);
+    return this.save(book);
   }
 
   async save(book: Book): Promise<Book> {
@@ -66,6 +65,10 @@ export class BooksRepository {
       }
       throw error;
     }
+  }
+
+  async updateSellingPrice(id: number, sellingPriceLocal: number): Promise<void> {
+    await this.repository.update(id, { selling_price_local: sellingPriceLocal });
   }
 
   async delete(id: number): Promise<void> {

@@ -4,10 +4,15 @@ import { CreateBookDto } from './dto/create-book.dto.js';
 import { UpdateBookDto } from './dto/update-book.dto.js';
 import { Book } from './entities/book.entity.js';
 import { MESSAGES } from '../common/constants/messages.constant.js';
+import { PriceCalculationService } from './services/price-calculation.service.js';
+import { PriceCalculationResponseDto } from './dto/response/price-calculation-response.dto.js';
 
 @Injectable()
 export class BooksService {
-  constructor(private readonly booksRepository: BooksRepository) {}
+  constructor(
+    private readonly booksRepository: BooksRepository,
+    private readonly priceCalculationService: PriceCalculationService,
+  ) {}
 
   async create(createBookDto: CreateBookDto): Promise<Book> {
     const bookExists = await this.booksRepository.findByIsbn(createBookDto.isbn);
@@ -49,11 +54,12 @@ export class BooksService {
     return this.booksRepository.update(id, updateBookDto, book);
   }
 
-  async remove(id: number): Promise<void> {
-
+  async remove(id: number): Promise<{ message: string }> {
     await this.findOne(id);
 
-    return this.booksRepository.delete(id);
+    await this.booksRepository.delete(id);
+
+    return { message: MESSAGES.BOOK_DELETED_SUCCESSFULLY };
   }
 
   async findByCategory(category: string): Promise<Book[]> {
@@ -70,14 +76,26 @@ export class BooksService {
     const books = await this.booksRepository.findLowStock(threshold);
     
     if (books.length === 0) {
-      throw new NotFoundException(MESSAGES.BOOKS_NOT_FOUND_BY_LOW_STOCK);
+      throw new NotFoundException(MESSAGES.BOOKS_NOT_FOUND_BY_LOW_STOCK(threshold));
     }
 
     return books;
   }
 
-  async calculatePrice(id: number): Promise<any> {
-    // TODO: se llama el servicio de calculateprice
-    return { message: `Pending calculation for book ${id}` };
+  async calculatePrice(id: number): Promise<PriceCalculationResponseDto> {
+    const book = await this.findOne(id);
+    
+    const priceCalculationResult = await this.priceCalculationService.calculatePrice(
+      book.cost_usd,
+      book.supplier_country,
+    );
+
+    // Llama al repositorio para persistir el precio unicamente, pero retornamos respuesta de logica de negocio
+    await this.booksRepository.updateSellingPrice(id, priceCalculationResult.selling_price_local);
+
+    return {
+      book_id: book.id,
+      ...priceCalculationResult,
+    };
   }
 }
