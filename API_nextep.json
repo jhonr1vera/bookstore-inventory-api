@@ -1,0 +1,452 @@
+{
+  "info": {
+    "name": "API Libreria Nextep",
+    "description": null,
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Local",
+      "item": [
+        {
+          "name": "Publicar libro",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "description": "",
+            "url": {
+              "raw": "{{HOST}}/books",
+              "protocol": "",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "books"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\"title\": \"El Quijote\",\n\"author\": \"Miguel de Cervantes\",\n\"isbn\": \"978-84-376-1595-4\",\n\"cost_usd\": 15.99,\n\"stock_quantity\": 25,\n\"category\": \"Literatura Clásica\",\n\"supplier_country\": \"ES\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Obtener todos los libros",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "",
+            "url": {
+              "raw": "{{HOST}}/books?page=1&limit=10",
+              "protocol": "",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "books?page=1&limit=10"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Obtener libro",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "",
+            "url": {
+              "raw": "{{HOST}}/books/:id",
+              "protocol": "",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "books",
+                ":id"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Eliminar libro",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "description": "",
+            "url": {
+              "raw": "{{HOST}}/books/:id",
+              "protocol": "",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "books",
+                ":id"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Actualizar libro",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "description": "",
+            "url": {
+              "raw": "{{HOST}}/books/:id",
+              "protocol": "",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "books",
+                ":id"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\"title\": \"El Quijote\",\n\"author\": \"Miguel de CervantesS\",\n\"isbn\": \"978-84-376-0494-7\",\n\"cost_usd\": 10,\n\"stock_quantity\": 25,\n\"category\": \"Literatura Clásica\",\n\"supplier_country\": \"ES\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Calcular precio",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "description": "",
+            "url": {
+              "raw": "{{HOST}}/books/:id/calculate-price",
+              "protocol": "",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "books",
+                ":id",
+                "calculate-price"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Obtener libros por categoria",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "",
+            "url": {
+              "raw": "{{HOST}}/books/search?category=Literatura Clásica",
+              "protocol": "",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "books",
+                "search?category=Literatura Clásica"
+              ],
+              "query": [
+                {
+                  "key": "category",
+                  "value": "Literatura Clásica"
+                }
+              ],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Obtener libros por stock bajo",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "",
+            "url": {
+              "raw": "{{HOST}}/books/low-stock?threshold=10",
+              "protocol": "",
+              "host": [
+                "{{HOST}}"
+              ],
+              "path": [
+                "books",
+                "low-stock?threshold=10"
+              ],
+              "query": [
+                {
+                  "key": "threshold",
+                  "value": "10"
+                }
+              ],
+              "variable": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Producción",
+      "item": [
+        {
+          "name": "Publicar libro",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "description": "",
+            "url": {
+              "raw": "{{PROD_HOST}}/books",
+              "protocol": "",
+              "host": [
+                "{{PROD_HOST}}"
+              ],
+              "path": [
+                "books"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Obtener todos los libros",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "",
+            "url": {
+              "raw": "{{PROD_HOST}}/books",
+              "protocol": "",
+              "host": [
+                "{{PROD_HOST}}"
+              ],
+              "path": [
+                "books"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Obtener libro",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "",
+            "url": {
+              "raw": "{{PROD_HOST}}/books/:id",
+              "protocol": "",
+              "host": [
+                "{{PROD_HOST}}"
+              ],
+              "path": [
+                "books",
+                ":id"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Actualizar libro",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "description": "",
+            "url": {
+              "raw": "{{PROD_HOST}}/books/:id",
+              "protocol": "",
+              "host": [
+                "{{PROD_HOST}}"
+              ],
+              "path": [
+                "books",
+                ":id"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Eliminar libro",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "description": "",
+            "url": {
+              "raw": "{{PROD_HOST}}/books/:id",
+              "protocol": "",
+              "host": [
+                "{{PROD_HOST}}"
+              ],
+              "path": [
+                "books",
+                ":id"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Calcular precio",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "description": "",
+            "url": {
+              "raw": "{{PROD_HOST}}/books/:id/calculate-price",
+              "protocol": "",
+              "host": [
+                "{{PROD_HOST}}"
+              ],
+              "path": [
+                "books",
+                ":id",
+                "calculate-price"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Obtener libros por categoria",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "",
+            "url": {
+              "raw": "{{PROD_HOST}}/books/search?category=",
+              "protocol": "",
+              "host": [
+                "{{PROD_HOST}}"
+              ],
+              "path": [
+                "books",
+                "search?category="
+              ],
+              "query": [
+                {
+                  "key": "category",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Obtener libros por stock bajo",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "",
+            "url": {
+              "raw": "{{PROD_HOST}}/books/low-stock?threshold=",
+              "protocol": "",
+              "host": [
+                "{{PROD_HOST}}"
+              ],
+              "path": [
+                "books",
+                "low-stock?threshold="
+              ],
+              "query": [
+                {
+                  "key": "threshold",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "HOST",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "PROD_HOST",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}
