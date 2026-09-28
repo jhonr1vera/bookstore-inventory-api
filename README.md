@@ -6,6 +6,14 @@ API REST para gestión de inventario de una librería, construida con NestJS, Ty
 
 Elegí NestJS porque es el framework con el que tengo mayor experiencia y me permite desarrollar la solución de forma eficiente, manteniendo una arquitectura modular y buenas prácticas de separación de responsabilidades. Además, sus módulos nativos, inyección de dependencias, validación mediante DTOs y facilidad de integración con TypeORM y PostgreSQL se ajustan directamente a los requerimientos de la prueba. Aunque se indica una preferencia por Django, el enunciado no lo establece como requisito obligatorio, por lo que consideré NestJS una alternativa adecuada para entregar una solución sólida y mantenible.
 
+## Decisiones técnicas
+
+- Para el manejo de los campos de Books, persistí solo los que se usan en el metodo `Create` y los campos adicionales se retornan solo en `CalculatePrice` con la tasa de cambio del dia de la peticion. Este último metodo sí persistira el `selling-price-local` en la entidad `Books`. Se hizo de esta forma ya que el ejercicio no especifica la persistencia de `CalculatePrice`, si no la respuesta en retorno.
+
+- Para la validación de categorias (Create y Buscar por categoria), use el enum para evitar errores de digitación y mantener la consistencia de los datos. Disponibles: `Literatura Clásica`, `Ficción`, `Fantasía`, `Ciencia Ficción`, `Historia`, `Biografía`, `Misterio`, `Otro`
+
+- Para la validación de paises, use una constante de paises soportados (Basandome en las monedas disponibles).
+
 ## Requisitos Previos
 
 - [Docker](https://www.docker.com/) y Docker Compose
@@ -166,3 +174,5 @@ curl "http://localhost:3000/books/low-stock?threshold=10"
 ```bash
 npm run test
 ```
+
+#### _Espero cumpla las expectativas 🙌🙌_
