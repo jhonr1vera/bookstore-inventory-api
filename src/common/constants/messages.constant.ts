@@ -5,4 +5,5 @@ export const MESSAGES = {
   BOOK_NOT_FOUND_BY_ISBN: (isbn: string) => `Book with ISBN ${isbn} not found`,
   BOOKS_NOT_FOUND_BY_CATEGORY: (category: string) => `No books found in category ${category}`,
   BOOKS_NOT_FOUND_BY_LOW_STOCK: (threshold: number) => `No books found with low stock (threshold: ${threshold})`,
+  BOOK_DELETED_SUCCESSFULLY: 'Book deleted successfully',
 };
