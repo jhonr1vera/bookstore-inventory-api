@@ -14,6 +14,7 @@ Elegí NestJS porque es el framework con el que tengo mayor experiencia y me per
 
 - Para la validación de paises, use una constante de paises soportados (Basandome en las monedas disponibles).
 
+- Se implementó rate limiting global con `@nestjs/throttler` (100 peticiones por minuto por IP) como medida básica de protección contra abuso.
 ## Requisitos Previos
 
 - [Docker](https://www.docker.com/) y Docker Compose
