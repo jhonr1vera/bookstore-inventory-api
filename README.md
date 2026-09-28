@@ -2,6 +2,8 @@
 
 API REST para gestión de inventario de una librería, construida con NestJS, TypeORM y PostgreSQL.
 
+#### URL Producción: `https://bookstore-inventory-api-2ugy.onrender.com`
+
 ## Elección del Proyecto
 
 Elegí NestJS porque es el framework con el que tengo mayor experiencia y me permite desarrollar la solución de forma eficiente, manteniendo una arquitectura modular y buenas prácticas de separación de responsabilidades. Además, sus módulos nativos, inyección de dependencias, validación mediante DTOs y facilidad de integración con TypeORM y PostgreSQL se ajustan directamente a los requerimientos de la prueba. Aunque se indica una preferencia por Django, el enunciado no lo establece como requisito obligatorio, por lo que consideré NestJS una alternativa adecuada para entregar una solución sólida y mantenible.
@@ -15,12 +17,25 @@ Elegí NestJS porque es el framework con el que tengo mayor experiencia y me per
 - Para la validación de paises, use una constante de paises soportados (Basandome en las monedas disponibles).
 
 - Se implementó rate limiting global con `@nestjs/throttler` (100 peticiones por minuto por IP) como medida básica de protección contra abuso.
+
+- Elegí Render por su facilidad de integración con GitHub, su plan gratuito y su despliegue sencillo de aplicaciones Node.js, permitiéndome disponer rápidamente de un entorno público de producción sin añadir complejidad innecesaria de infraestructura.
+
 ## Requisitos Previos
 
 - [Docker](https://www.docker.com/) y Docker Compose
 - Node.js >= 20.x (solo si se desea ejecutar sin Docker)
 - [PostgreSQL](https://www.postgresql.org/download/) 16
 - Git
+
+## Stack Tecnologico
+
+- NestJS
+- TypeScript
+- PostgreSQL
+- TypeORM
+- class-validator / class-transformer
+- Docker
+- Render
 
 ## Instalación y Ejecución
 
@@ -86,7 +101,10 @@ docker compose up --build -d
 
 ## Ejemplos de Uso de los Endpoints
 
-Base URL: `http://localhost:3000`
+> **Nota:** Cada endpoint está preparado para proporcionar respuestas claras al usuario, incluyendo mensajes de validación y retroalimentación ante errores o resultados de la operación.
+
+- URL de producción: `https://bookstore-inventory-api-2ugy.onrender.com`
+- URL local: `http://localhost:3000`
 
 ### Crear un libro
 
