@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { ExchangeRateService } from '../../exchange-rate/exchange-rate.service.js';
 import { COUNTRY_CURRENCY } from '../../common/constants/country-currency.constant.js';
 import { PROFIT_MARGIN_PERCENTAGE } from '../../common/constants/price-calculation.constant.js';
@@ -8,7 +8,11 @@ export class PriceCalculationService {
   constructor(private readonly exchangeRateService: ExchangeRateService) {}
 
   async calculatePrice(costUsd: number, supplierCountry: string) {
-    const currency = COUNTRY_CURRENCY[supplierCountry as keyof typeof COUNTRY_CURRENCY] || 'USD';
+    const currency = COUNTRY_CURRENCY[supplierCountry as keyof typeof COUNTRY_CURRENCY];
+
+    if (!currency) {
+      throw new BadRequestException(`Unsupported supplier country: ${supplierCountry}`);
+    }
     
     // Obtener la tasa de cambio actual usando como base USD
     const exchangeRate = await this.exchangeRateService.getRate(currency);
